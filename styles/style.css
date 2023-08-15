@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
     margin: 0;
     background-color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Loader */
@@ -9,4 +12,33 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Title */
+.title {
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.image-container {
+    margin: 10px 30%;
+}
+
+.image-container img {
+    width: 100%;
+    margin-top: 5px;
+}
+
+@media  (max0-width: 600px) {
+    .title {
+        font-size: 20px;
+    }
+    .image-container {
+        margin: 10px;
+    }
+    
 }
