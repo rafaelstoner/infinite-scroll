@@ -14,6 +14,7 @@ async function getPhotos() {
         displayPhotos(photosArray);
     }
     catch (error) {
+        console.log('error', error);
 
     }
 }
@@ -44,11 +45,23 @@ function displayPhotos(photos) {
 }
 
 function setAttribute(element, attributes) {
-    for (key in attributes) {
+    for (const key in attributes) {
         element.setAttribute(key, attributes[key]);
     }
 
 }
+
+window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        console.log('Window.InnerHeight', window.innerHeight);
+        console.log('window.srollY', window.scrollY);
+        console.log('window.innerHeigt + window.scroll Y', window.innerHeight + window.scrollY);
+        console.log('body.offsetHeight', document.body.offsetHeight);
+        console.log('')
+        console.log('Scrolled');
+    }
+});
+
 
 //On loading
 getPhotos();
