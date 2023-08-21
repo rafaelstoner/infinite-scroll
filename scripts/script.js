@@ -3,6 +3,7 @@ const count = 5;
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplashApiKey}&count=${count}`;
 let photosArray = [];
 const imageContainer = document.getElementById('image-container');
+const loader = document.getElementById('loader');
 
 let totalImages = 0;
 let imagesLoaded = 0;
@@ -12,6 +13,7 @@ function trackLoadedImages() {
     imagesLoaded++;
     if(imagesLoaded === totalImages) {
         allImagesLoaded = true;
+        loader.hidden = true;
     }
 
 }
