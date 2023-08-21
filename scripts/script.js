@@ -1,8 +1,20 @@
 import { unsplashApiKey } from '../config.js';
-const count = 10;
+const count = 5;
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplashApiKey}&count=${count}`;
 let photosArray = [];
 const imageContainer = document.getElementById('image-container');
+
+let totalImages = 0;
+let imagesLoaded = 0;
+let allImagesLoaded = false;
+
+function trackLoadedImages() {
+    imagesLoaded++;
+    if(imagesLoaded === totalImages) {
+        allImagesLoaded = true;
+    }
+
+}
 
 
 async function getPhotos() {
@@ -13,6 +25,7 @@ async function getPhotos() {
 
         displayPhotos(photosArray);
     }
+
     catch (error) {
         console.log('error', error);
 
@@ -22,6 +35,8 @@ async function getPhotos() {
 
 
 function displayPhotos(photos) {
+    totalImages = photos.length;
+    imagesLoaded = 0;
     photos.forEach(photo => {
         const link = document.createElement('a');
 
@@ -39,6 +54,7 @@ function displayPhotos(photos) {
         });
 
 
+        image.addEventListener('load', trackLoadedImages );
         link.appendChild(image);
         imageContainer.appendChild(link);
     });
@@ -52,13 +68,10 @@ function setAttribute(element, attributes) {
 }
 
 window.addEventListener('scroll', () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log('Window.InnerHeight', window.innerHeight);
-        console.log('window.srollY', window.scrollY);
-        console.log('window.innerHeigt + window.scroll Y', window.innerHeight + window.scrollY);
-        console.log('body.offsetHeight', document.body.offsetHeight);
-        console.log('')
-        console.log('Scrolled');
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && allImagesLoaded) {
+        allImagesLoaded = false;
+        getPhotos();
+ 
     }
 });
 
